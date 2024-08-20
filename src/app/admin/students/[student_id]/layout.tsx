@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Sidebar from "@/app/ui/adminDashboard/Sidebar";
 import Navbar from "@/app/ui/adminDashboard/Navbar";
-import { TUser } from "@/app/ui/navbar/Navbar";
 import React from "react";
 
 interface Props {

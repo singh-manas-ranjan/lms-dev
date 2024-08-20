@@ -2,9 +2,7 @@ import { ReactNode } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Sidebar from "@/app/ui/adminDashboard/Sidebar";
 import Navbar from "@/app/ui/adminDashboard/Navbar";
-import { TUser } from "@/app/ui/navbar/Navbar";
 import React from "react";
-import { fetchUserById } from "@/actions/adminAccess/adminAccessAction";
 
 interface Props {
   children: ReactNode;
@@ -12,11 +10,6 @@ interface Props {
 }
 
 const Layout = async ({ children, params: { instructor_id } }: Props) => {
-  const instructor: TUser | null = await fetchUserById(
-    instructor_id,
-    "instructors"
-  );
-
   return (
     <Flex direction="row">
       <Sidebar userId={instructor_id} />

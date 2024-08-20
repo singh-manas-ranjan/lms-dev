@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   CardHeader,
@@ -10,10 +11,10 @@ import {
   Grid,
   Card,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { sxScrollbar } from "../../../../../../public/scrollbarStyle";
 import { TUser } from "@/app/ui/navbar/Navbar";
-import { fetchUserById } from "@/actions/adminAccess/adminAccessAction";
+import axios from "axios";
 
 const main = {
   width: "100%",
@@ -32,11 +33,27 @@ const textStyle = {
   fontSize: { base: "sm" },
 };
 
-const MyPublishedCourses = async ({ params: { instructor_id } }: Props) => {
-  const instructor: TUser | null = await fetchUserById(
-    instructor_id,
-    "instructors"
-  );
+const MyPublishedCourses = ({ params: { instructor_id } }: Props) => {
+  const [instructor, setInstructor] = useState<TUser>({} as TUser);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          `https://learnopia-backend.vercel.app/api/v1/admin/access/instructors/${instructor_id}`,
+          // `http://localhost:3131/api/v1/admin/access/instructors/${instructor_id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setInstructor(response.data.body);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [instructor_id]);
   const courses = instructor?.publishedCourses;
   return (
     <Box as="main" sx={main} rowGap={5} overflow={"hidden"}>
