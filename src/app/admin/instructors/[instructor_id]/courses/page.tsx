@@ -122,4 +122,4 @@ const MyPublishedCourses = ({ params: { instructor_id } }: Props) => {
   );
 };
 
-export default MyPublishedCourses;
+export default React.memo(MyPublishedCourses);

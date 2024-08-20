@@ -22,7 +22,6 @@ import studentRankings, {
 } from "../../../../../public/rankingData";
 import BannerCarousel from "@/app/ui/bannerCarousel/BannerCarousel";
 import { popularTasks } from "@/app/ui/adminDashboard/overview/bottomCards/OverviewBottomCards";
-import { fetchUserById } from "@/actions/adminAccess/adminAccessAction";
 import axios from "axios";
 import { TUser } from "@/app/ui/navbar/Navbar";
 
@@ -220,8 +219,8 @@ const AdminInstructorDashboard = ({ params: { instructor_id } }: Props) => {
               >
                 <Box h={"100%"} w={"100%"}>
                   <Accordion h={"100%"}>
-                    {instructor.publishedCourses
-                      .slice(0, 4)
+                    {instructor?.publishedCourses
+                      ?.slice(0, 4)
                       .map((course, idx) => (
                         <AccordionItem key={idx}>
                           <Text>
@@ -437,4 +436,4 @@ const AdminInstructorDashboard = ({ params: { instructor_id } }: Props) => {
   );
 };
 
-export default AdminInstructorDashboard;
+export default React.memo(AdminInstructorDashboard);
