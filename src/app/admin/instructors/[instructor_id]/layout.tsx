@@ -22,7 +22,7 @@ const Layout = async ({ children, params: { instructor_id } }: Props) => {
       <Sidebar userId={instructor_id} />
 
       <Flex direction="column" ml={{ sm: "80px" }} flex="1" bg="gray.100">
-        <Navbar user={instructor} userId={instructor_id} />
+        <Navbar userId={instructor_id} />
         <Box flex="1" w="100%" h={"100dvh"}>
           {children}
         </Box>
